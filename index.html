@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form onsubmit="return formuGonder(event)">
+      <label for="min">min:</label>
+      <input type="number" id="min" name="min" />
+      <br /><br />
+
+      <label for="max">max:</label>
+      <input type="number" id="max" name="max" />
+      <br /><br />
+
+      <label for="bulunacakSayi">Bulunmak istenen sayı:</label>
+      <input type="number" id="bulunacakSayi" name="bulunacakSayi" />
+      <br /><br />
+
+      <input type="submit" value="Sayı üret" />
+    </form>
+    <br />
+    <hr />
+
+    <p>
+      Girilen değerler arasında, hedeflenen sayı bulunana kadar rastgele sayı
+      üretilmiştir.
+    </p>
+    <p>Üretilen rastgele sayılar: <span id="sayilar"></span></p>
+
+    <script>
+      function formuGonder(e) {
+        e.preventDefault();
+        const min = Number(document.getElementById("min").value);
+        const max = Number(document.getElementById("max").value);
+        const bulunacakSayi = Number(
+          document.getElementById("bulunacakSayi").value
+        );
+
+        const sayilar = [];
+
+        do {
+          var bulunanSayi = sayiUret(min, max);
+          sayilar.push(bulunanSayi);
+        } while (bulunanSayi !== bulunacakSayi);
+
+        document.getElementById("sayilar").innerHTML = sayilar.join(",");
+      }
+
+      function sayiUret(min, max) {
+        return Math.round(Math.random() * (max - min)) + min;
+      }
+    </script>
+  </body>
+</html>
